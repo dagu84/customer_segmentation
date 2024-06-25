@@ -9,6 +9,7 @@ def transform_time_features(X: pd.DataFrame) -> pd.DataFrame:
 
     # New feature that will find the distance from the most recent timestamp
     X['Customer_For'] = X['Dt_Customer'].apply(lambda x: X['Dt_Customer'].max() - x)
+    X['Customer_For'] = X['Customer_For'].dt.days.astype(int)
 
     # Creating a new 'age' feature
     X['Age'] = CURRENT_DATE - X['Year_Birth']
@@ -40,6 +41,6 @@ def transform_features(X: pd.DataFrame) -> pd.DataFrame:
     X['Spent'] = X['MntWines']+ X['MntFruits']+ X['MntMeatProducts']+ X['MntFishProducts']+ X['MntSweetProducts']+ X['MntGoldProds']
 
     # Removing uneccessary features
-    X = X.drop(columns=['Marital_Status', 'Z_CostContact', 'Z_Revenue', 'ID'])
+    X = X.drop(columns=['Marital_Status', 'Z_CostContact', 'Z_Revenue', 'ID', 'AcceptedCmp1', 'AcceptedCmp2', 'AcceptedCmp3', 'AcceptedCmp4', 'AcceptedCmp5', 'Complain', 'Response'])
 
     return X
