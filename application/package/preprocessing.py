@@ -26,5 +26,5 @@ def preprocess_features(X: pd.DataFrame) -> np.ndarray:
         rel_pipe = FunctionTransformer(np.array(lambda x: [rel_mapping[label] for label in x]).reshape(-1, 1))
 
         # Standardisation
-
+        X
         scaler = FunctionTransformer()

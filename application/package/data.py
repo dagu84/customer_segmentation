@@ -15,7 +15,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop_duplicates()
 
     # Setting the correct dtypes
-    df['Dt_Customer'] = pd.to_datetime(df['Dt_Customer'])
+    df['Dt_Customer'] = pd.to_datetime(df['Dt_Customer'], infer_datetime_format=True)
 
     print("✅ data cleaned")
 
