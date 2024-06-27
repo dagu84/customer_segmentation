@@ -4,14 +4,15 @@ from application.package.params import *
 
 def transform_time_features(X: pd.DataFrame) -> pd.DataFrame:
     assert isinstance(X, pd.DataFrame)
+
     CURRENT_DATE = pd.Timestamp(datetime.date.today())
 
     # New feature that will find the distance from the most recent timestamp
-    X['Customer_For'] = X['Dt_Customer'].apply(lambda x: CURRENT_DATE - x)
+    X['Customer_For'] = X['Dt_Customer'].apply(lambda x: X['Dt_Customer'].max() - x)
     X['Customer_For'] = X['Customer_For'].dt.days.astype(int)
 
     # Creating a new 'age' feature
-    X['Age'] = CURRENT_DATE - X['Year_Birth']
+    X['Age'] = CURRENT_DATE.year - X['Year_Birth']
 
     # Dropping transformed features
     X = X.drop(columns=['Dt_Customer', 'Year_Birth'])
